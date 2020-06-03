@@ -146,7 +146,7 @@ history = model.fit_generator(
       )
 ```
 <p align="center">
-<img src="https://github.com/TTJakob/RoomRecognition/blob/pictures/VGG16_004_Aug_conv.PNG"  width="250" height="250" /> <img src="https://vignette.wikia.nocookie.net/deathbattle/images/4/47/VS.png/revision/latest?cb=20160727174407" width="200" height="225" /> <img src="https://github.com/TTJakob/Kraeuterproject/blob/pictures/kresse004.jpg" width="250" height="250" />
+<img src="https://github.com/TTJakob/RoomRecognition/blob/pictures/VGG16_004_Aug_conv.PNG"  width="250" height="250" /> 
 <p>
 
 ```
