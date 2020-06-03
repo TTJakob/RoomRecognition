@@ -146,7 +146,7 @@ history = model.fit_generator(
       )
 ```
 <p align="center">
-<img src="https://github.com/TTJakob/RoomRecognition/blob/pictures/VGG16_004_Aug_conv.PNG"  width="450" height="350" /> 
+<img src="https://github.com/TTJakob/RoomRecognition/blob/pictures/VGG16_004_Aug_conv.PNG"   /> 
 <p>
 
 ```
