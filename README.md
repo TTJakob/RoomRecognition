@@ -306,7 +306,7 @@ Epoch 75/75
 ```
 
 <p align="center">
-<img src="https://github.com/TTJakob/RoomRecognition/blob/pictures/FTVGG16_004_Aug_Adam_conv_Layer4plus5.PNG/> 
+<img src="https://github.com/TTJakob/RoomRecognition/blob/pictures/FTVGG16_004_Aug_Adam_conv_Layer4plus5.PNG"   /> 
 <p>
 
 ```
