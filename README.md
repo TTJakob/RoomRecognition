@@ -91,3 +91,65 @@ Trainable params: 0
 Non-trainable params: 14,714,688
 _________________________________________________________________
 ```
+```
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+vgg16 (Model)                (None, 512)               14714688  
+_________________________________________________________________
+dense_1 (Dense)              (None, 1024)              525312    
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 1024)              0         
+_________________________________________________________________
+dense_2 (Dense)              (None, 1024)              1049600   
+_________________________________________________________________
+dense_3 (Dense)              (None, 14)                14350     
+=================================================================
+Total params: 16,303,950
+Trainable params: 1,589,262
+Non-trainable params: 14,714,688
+```
+```
+train_datagen = ImageDataGenerator(
+    preprocessing_function=applications.vgg16.preprocess_input,
+    rescale=1./256,
+    rotation_range=30,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True,
+    fill_mode='nearest'
+                                  )
+                            
+
+val_datagen = ImageDataGenerator(preprocessing_function=applications.vgg16.preprocess_input)
+
+train_generator = train_datagen.flow_from_directory(
+        # This is the target directory
+        train_dir,
+        batch_size=20,
+         class_mode='categorical')
+
+validation_generator = val_datagen.flow_from_directory(
+        validation_dir,
+        batch_size=20,
+        class_mode='categorical')
+```
+```
+history = model.fit_generator(
+      train_generator,
+      steps_per_epoch=10,
+      epochs=75,
+      validation_data=validation_generator,
+      validation_steps=5,
+      )
+```
+```
+```
+```
+```
+```
+```
+```
+```
