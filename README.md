@@ -35,33 +35,17 @@ Transfer learning is used to build highly accurate computer vision models for yo
 
 A pre-trained network is simply a saved network previously trained on a large dataset, typically on a large-scale image classification task. If this original dataset is large enough and general enough, then the features learned by the pre-trained network can effectively act as a generic model of our visual world in therms of identifying shapes and objects and extract different features out of a picture. So one pre-trained model/convolutional base can prove useful for many different computer vision problems.
 
-```
-from keras import layers
-from keras import models
-from keras import optimizers
-from keras import applications
+## Create a first neural network
 
-import tensorflow as tf
-from keras.applications import VGG16
-from keras.models import Sequential
-from keras import layers
-from keras.layers import Dense, Flatten, GlobalAveragePooling2D
-import os
-import numpy as np
-from keras.preprocessing.image import ImageDataGenerator
-from keras.applications.vgg16 import preprocess_input
-```
-```
-base_dir = 'E:/Bilder/Uni/BaRaume'
-base_dir_models = 'E:/Bilder/Uni/TensModels'
+To start off I used VGG16 as a pretrained network. It´s a "simpel" neural network that is easy to implement and it´s and its architecture offers solid results proven in various international challenges.
 
-train_dir = os.path.join(base_dir, 'trainMod')
-validation_dir = os.path.join(base_dir, 'valMod')
-test_dir = os.path.join(base_dir, 'test')
+I have used VGG with the pretrained weights from the imagenet challenge and modified it to recognize the 14 different rooms which I took pictures of.
+
+
+```
 
 num_classes = 14
 
-vgg16_weights_path = 'imagenet'
 
 model = Sequential()
 model.add(VGG16(include_top=False, pooling='avg', weights=vgg16_weights_path,))
@@ -72,6 +56,7 @@ model.add(Dense(num_classes, activation='softmax'))
 
 # Say not to train first layer (VGG16) model. It is already trained
 model.layers[0].trainable = False
+```
 ```
 rmsprop = optimizers.RMSprop(lr=0.0001, rho=0.9)
 adam = optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, amsgrad=True)
