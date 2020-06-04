@@ -1,5 +1,17 @@
 # RoomRecognition
 Recognition of Classrooms via Deeplearning 
+
+## Getting Started und Idee
+
+Die Ideen zu einer Indoor-Navigation kam mir während der Anfangszeit meines Studiums, als ich noch sehr oft auf der Suche nach Klassenzimmern und Räumen war. Vergleichbare Situationen erlebt man auch in Flüghäfen oder großen Firmenkomplexen.
+
+Zugegebenermaßen ist die Idee von Indoor-Navigation nicht neu, eine genaue Indoor-Navigation über beispielsweise W-lan Ortung ist aktuell außerst aufwendig umzusetzen.
+
+Das Gebäude in dem die Navigation 
+
+Natürlich ist es etwas ambitioniert direkt eine funktionierende Navigation zu erstellen, deswegen liegt der Fokus dieser arbeit auf der Erkennung der einzelnen Räumer des Gebäudes.
+
+Deswegen als "Grundprojekt" erstmal die Abgrezung von Pilzen und Kräutern voneinander und von anderen (Other Class).
 ```
 from keras import layers
 from keras import models
