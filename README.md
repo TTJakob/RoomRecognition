@@ -26,7 +26,15 @@ In a prototypical navigation system the user should take a photo of the room he 
 
 In my research I noticed that the majority of research projects are aimed at the recognition of objects in a room and not at the room itself. This fact encouraged me to dedicate myself to this project again.
 
-Translated with www.DeepL.com/Translator (free version)
+
+## Transfer learning
+
+Transfer learning is used to build highly accurate computer vision models for your custom purposes, even when you have relatively little data. Transfer learning uses a pre-trained network and only train a custom classifier that reduces development and training time and provides good results.
+
+![Transfer Learning](https://tensorflow.rstudio.com/blog/images/keras-pretrained-convnet/swapping_fc_classifier.png)
+
+A pre-trained network is simply a saved network previously trained on a large dataset, typically on a large-scale image classification task. If this original dataset is large enough and general enough, then the features learned by the pre-trained network can effectively act as a generic model of our visual world in therms of identifying shapes and objects and extract different features out of a picture. So one pre-trained model/convolutional base can prove useful for many different computer vision problems.
+
 ```
 from keras import layers
 from keras import models
