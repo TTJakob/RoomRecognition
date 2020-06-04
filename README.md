@@ -7,11 +7,26 @@ Die Ideen zu einer Indoor-Navigation kam mir während der Anfangszeit meines Stu
 
 Zugegebenermaßen ist die Idee von Indoor-Navigation nicht neu, eine genaue Indoor-Navigation über beispielsweise W-lan Ortung ist aktuell außerst aufwendig umzusetzen.
 
-Das Gebäude in dem die Navigation 
+Das Gebäude in dem die Navigation erfolgen sollte ist das Gebäude meiner ehmaligen FH.
 
-Natürlich ist es etwas ambitioniert direkt eine funktionierende Navigation zu erstellen, deswegen liegt der Fokus dieser arbeit auf der Erkennung der einzelnen Räumer des Gebäudes.
+Natürlich ist es etwas ambitioniert direkt eine funktionierende Navigation zu erstellen, deswegen liegt der Fokus dieser arbeit auf der Erkennung der einzelnen Räume des Gebäudes. Die Räume sollten anhand von Fotos und mittels Deep Learning erkannt und vonander unterschieden werden.
+In einem prototypischen Navigationssytem soll der User ein Foto von dem Raum in dem er sich befindet schießen. Der Raum und somit seine Position vom System erkannt werden und als Basis für eine Navigation dienen.
 
-Deswegen als "Grundprojekt" erstmal die Abgrezung von Pilzen und Kräutern voneinander und von anderen (Other Class).
+In meinen Forschungen ist mir aufgefallen, dass der Großteil der Forschungsprojekte auf die Erkennung von Objekten in einem Raum abziehlt und nicht auf den Raum an sich. Diese Tatsache bestärkte mich nochmal mich diesem Projekt zu widmen.
+***
+The ideas for indoor navigation came to me during the early days of my studies, when I was often looking for classrooms and rooms. Comparable situations are also experienced in airports or large company complexes.
+
+Admittedly, the idea of indoor navigation is not new, but an accurate indoor navigation using for example W-lan positioning is currently extremely difficult to implement.
+
+The building in which the navigation should take place is the building of my former university of applied sciences.
+
+Of course it is a bit ambitious to create a working navigation directly, so the focus of this work is on the recognition of the individual rooms of the building. The rooms should be recognized and distinguished from each other by means of photos and deep learning.
+
+In a prototypical navigation system the user should take a photo of the room he is in. The room and thus its position should be recognized by the system and serve as a basis for navigation.
+
+In my research I noticed that the majority of research projects are aimed at the recognition of objects in a room and not at the room itself. This fact encouraged me to dedicate myself to this project again.
+
+Translated with www.DeepL.com/Translator (free version)
 ```
 from keras import layers
 from keras import models
