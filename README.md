@@ -63,6 +63,7 @@ adam = optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, amsgrad=True)
 sgd =optimizers.SGD(lr=0.01, nesterov=False)
 model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accuracy'])
 ```
+```
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
 =================================================================
