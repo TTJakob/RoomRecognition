@@ -350,6 +350,7 @@ With the model.fit_generator the Network can be trained again.
 <p>
 
 With the finetuning the results could be improved again. The training accuracy could be increased to 95 and the validation accuracy to about 90%.
+
 The loss of validation could also be reduced to below 0.5, which is also a positive development and can be used as a base model for an indor navigaiton prototype.
 
 ## Future Work
