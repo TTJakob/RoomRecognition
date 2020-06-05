@@ -29,7 +29,7 @@ In my research I noticed that the majority of research projects are aimed at the
 
 ## Transfer learning
 
-Transfer learning is used to build highly accurate computer vision models for your custom purposes, even when you have relatively little data. Transfer learning uses a pre-trained network and only train a custom classifier that reduces development and training time and provides good results.
+Transfer learning is used to build highly accurate computer vision models for your custom purposes, even when you have relatively little data. Transfer learning uses a pre-trained network and only trains a custom classifier that reduces development and training time and provides good results.
 
 ![Transfer Learning](https://tensorflow.rstudio.com/blog/images/keras-pretrained-convnet/swapping_fc_classifier.png)
 
@@ -41,7 +41,9 @@ To start off I used VGG16 as a pretrained network. It´s a "simpel" neural netwo
 
 I have used VGG with the pretrained weights from the imagenet challenge and modified it to recognize the 14 different rooms which I took pictures of.
 
+The VGG Model is pretrained but not customized for the task of classifying rooms.
 
+To optimze this Model for this specific usecase a new classifier is needed.
 ```
 
 num_classes = 14
@@ -53,16 +55,18 @@ model.add(Dense(1024, activation='relu'))
 model.add(layers.Dropout(0.5))
 model.add(Dense(1024, activation='relu'))
 model.add(Dense(num_classes, activation='softmax'))
+```
 
+These lines initialise the VGG16 Model and add the new untrained classifier.
+I have oriented myself towards the original classifier and used two dense layers with 1024 notes and a dropout layer inbetween.
+The Outputlayer (last) sorts the picture into one of the 14 classes.
+
+```
 # Say not to train first layer (VGG16) model. It is already trained
 model.layers[0].trainable = False
 ```
-```
-rmsprop = optimizers.RMSprop(lr=0.0001, rho=0.9)
-adam = optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, amsgrad=True)
-sgd =optimizers.SGD(lr=0.01, nesterov=False)
-model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accuracy'])
-```
+The VGG 16 is allready trained so we dont have to train hit again (this time).
+
 ```
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
@@ -112,6 +116,7 @@ Trainable params: 0
 Non-trainable params: 14,714,688
 _________________________________________________________________
 ```
+VGG16 with 0 trainable parameters.
 ```
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
@@ -129,6 +134,18 @@ dense_3 (Dense)              (None, 14)                14350
 Total params: 16,303,950
 Trainable params: 1,589,262
 Non-trainable params: 14,714,688
+```
+The custom classifier with roughtly 1.6 Mio prameters to train.
+This is a massive improvement in training time compared to the 15 Mio parameters of the VGG 16 Model.
+
+![VGG Model](https://arxiv.org/abs/1409.1556)
+
+
+```
+rmsprop = optimizers.RMSprop(lr=0.0001, rho=0.9)
+adam = optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, amsgrad=True)
+sgd =optimizers.SGD(lr=0.01, nesterov=False)
+model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accuracy'])
 ```
 ```
 train_datagen = ImageDataGenerator(
