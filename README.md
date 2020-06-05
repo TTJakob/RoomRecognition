@@ -140,15 +140,14 @@ The custom classifier with roughtly 1.6 Mio prameters to train.
 
 This is a massive improvement in training time compared to the 15 Mio parameters of the VGG 16 Model.
 
-[VGG Model](https://arxiv.org/abs/1409.1556)
+Link to the original Paper of the VGG architecture [VGG Model](https://arxiv.org/abs/1409.1556)6)
 
 
 ```
-rmsprop = optimizers.RMSprop(lr=0.0001, rho=0.9)
 adam = optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, amsgrad=True)
-sgd =optimizers.SGD(lr=0.01, nesterov=False)
 model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accuracy'])
 ```
+Initializing the optimizer and compiling the model.
 ```
 train_datagen = ImageDataGenerator(
     preprocessing_function=applications.vgg16.preprocess_input,
@@ -164,7 +163,9 @@ train_datagen = ImageDataGenerator(
                             
 
 val_datagen = ImageDataGenerator(preprocessing_function=applications.vgg16.preprocess_input)
-
+```
+To artificially "increase" the number of training pictures we use data Augmentation. It intruduces a variaty of options to manipulate a image before it is loaded into the neural network.
+```
 train_generator = train_datagen.flow_from_directory(
         # This is the target directory
         train_dir,
@@ -176,6 +177,7 @@ validation_generator = val_datagen.flow_from_directory(
         batch_size=20,
         class_mode='categorical')
 ```
+With these generatores the batch size can be adjusted and the directory of the pictures is referenced.
 ```
 history = model.fit_generator(
       train_generator,
@@ -185,6 +187,10 @@ history = model.fit_generator(
       validation_steps=5,
       )
 ```
+The model.fit_generator defines the training variables and initializes the training.
+
+## Training Results
+
 <p align="center">
 <img src="https://github.com/TTJakob/RoomRecognition/blob/pictures/VGG16_004_Aug_conv.PNG"   /> 
 <p>
