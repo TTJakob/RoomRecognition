@@ -138,7 +138,7 @@ Non-trainable params: 14,714,688
 The custom classifier with roughtly 1.6 Mio prameters to train.
 This is a massive improvement in training time compared to the 15 Mio parameters of the VGG 16 Model.
 
-![VGG Model](https://arxiv.org/abs/1409.1556)
+[VGG Model](https://arxiv.org/abs/1409.1556)
 
 
 ```
