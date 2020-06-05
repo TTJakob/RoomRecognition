@@ -58,6 +58,7 @@ model.add(Dense(num_classes, activation='softmax'))
 ```
 
 These lines initialise the VGG16 Model and add the new untrained classifier.
+
 I have oriented myself towards the original classifier and used two dense layers with 1024 notes and a dropout layer inbetween.
 The Outputlayer (last) sorts the picture into one of the 14 classes.
 
@@ -136,6 +137,7 @@ Trainable params: 1,589,262
 Non-trainable params: 14,714,688
 ```
 The custom classifier with roughtly 1.6 Mio prameters to train.
+
 This is a massive improvement in training time compared to the 15 Mio parameters of the VGG 16 Model.
 
 [VGG Model](https://arxiv.org/abs/1409.1556)
