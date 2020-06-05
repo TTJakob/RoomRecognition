@@ -164,7 +164,7 @@ train_datagen = ImageDataGenerator(
 
 val_datagen = ImageDataGenerator(preprocessing_function=applications.vgg16.preprocess_input)
 ```
-To artificially "increase" the number of training pictures we use data Augmentation. It intruduces a variaty of options to manipulate a image before it is loaded into the neural network.
+To artificially "increase" the number of training pictures we use data augmentation. It intruduces a variaty of options to manipulate a image before it is loaded into the neural network.
 ```
 train_generator = train_datagen.flow_from_directory(
         # This is the target directory
@@ -196,23 +196,16 @@ The model.fit_generator defines the training variables and initializes the train
 <p>
 
 With a Training accuracy of just around 90% and a validation accuracy of rougthly 80% its a good first shot.
-The validation loss is about 0,8. This result is ok for an early network but can be improved using varius techniques.
+The validation loss is about 0,8.
+These results are ok for an early network but can be improved using varius techniques.
 
-Finetuning
+## Finetuning
 
-```
-base_dir = 'E:/Bilder/Uni/BaRaume'
-base_dir_models = 'E:/Bilder/Uni/TensModels'
+Finetuning is a technique in transfer learning that adapts the network even more to the task at hand and thus improves the results.
 
-train_dir = os.path.join(base_dir, 'trainMod')
-validation_dir = os.path.join(base_dir, 'valMod')
-test_dir = os.path.join(base_dir, 'test')
-```
+In a further training phase, parts of the previously frozen network will also be included in the training.
 
-```
-model = load_model("E:/Bilder/Uni/TensModels/vgg16_004_Aug_conv.h5")
-```
-
+Finetuning of the network should start with the last layers to avoid too big changes in the network. Changes to early layers of networks can result in large variations and bad results.
 ```
 model.layers[0].trainable = True
 
@@ -225,12 +218,9 @@ for layer in model.layers[0].layers:
     else:
         layer.trainable = False
 ```
-```
-rmsprop = optimizers.RMSprop(lr=0.0001, rho=0.9)
-adam = optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, amsgrad=True)
-sgd =optimizers.SGD(lr=0.01, nesterov=False)
-model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accuracy'])
-```
+In this section the last block of the VGG16 architecture is unforzen and therefore trained again.
+
+
 ```
 model.layers[0].summary()
 _________________________________________________________________
@@ -281,6 +271,7 @@ Trainable params: 7,079,424
 Non-trainable params: 7,635,264
 _________________________________________________________________
 ```
+The last block is unforzen so we have to train its parameters again.
 ```
 model.summary()
 _________________________________________________________________
@@ -301,40 +292,39 @@ Trainable params: 8,668,686
 Non-trainable params: 7,635,264
 _________________________________________________________________
 ```
+Now we have over 8.6 Mio Paramters to train.
+```
+adam = optimizers.Adam(lr=0.0001, beta_1=0.9, beta_2=0.999, amsgrad=True)
+model.compile(optimizer=adam, loss='categorical_crossentropy', metrics=['accuracy'])
+```
+The optimizer is initalized with a lower learningrate (lr) to avoid large changes on a functioning networks which can lead to way worse results.
+
 ```
 train_datagen = ImageDataGenerator(preprocessing_function=applications.vgg16.preprocess_input,
 #train_datagen = ImageDataGenerator(
-       #rescale=1./256,
-      rotation_range=30,
+       rotation_range=30,
      width_shift_range=0.2,
      height_shift_range=0.2,
      shear_range=0.2,
       zoom_range=0.2,
-      #horizontal_flip=True,
-      fill_mode='nearest'
+       fill_mode='nearest'
                                   )
                             
 
-#val_datagen = ImageDataGenerator(
-     #zoom_range=0.2,
-      #horizontal_flip=True,
-      #fill_mode='nearest')
 val_datagen = ImageDataGenerator(preprocessing_function=applications.vgg16.preprocess_input)
 
 train_generator = train_datagen.flow_from_directory(
         # This is the target directory
         train_dir,
-        # All images will be resized to 224x224
-        #target_size=(224, 224),
         batch_size=20,
          class_mode='categorical')
 
 validation_generator = val_datagen.flow_from_directory(
         validation_dir,
-        #target_size=(224, 224),
         batch_size=20,
         class_mode='categorical')
 ```
+Data Augmention is utilized again and the genarators remain vastly unchanged.
 ```
 history = model.fit_generator(
       train_generator,
@@ -351,17 +341,15 @@ Epoch 75/75
 
 
 ```
+With the model.fit_generator the Network can be trained again.
+
+## Finetuning Results
 
 <p align="center">
 <img src="https://github.com/TTJakob/RoomRecognition/blob/pictures/FTVGG16_004_Aug_Adam_conv_Layer4plus5.PNG"   /> 
 <p>
 
-```
+With the finetuning the results could be improved again. The training accuracy could be increased to 95 and the validation accuracy to about 90%.
+The loss of validation could also be reduced to below 0.5, which is also a positive development and can be used as a base model for an indor navigaiton prototype.
 
-```
-```
-
-```
-```
-
-```
+Inception V3 and Resnet50 TBA
