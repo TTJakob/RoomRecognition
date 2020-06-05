@@ -195,7 +195,8 @@ The model.fit_generator defines the training variables and initializes the train
 <img src="https://github.com/TTJakob/RoomRecognition/blob/pictures/VGG16_004_Aug_conv.PNG"   /> 
 <p>
 
-
+With a Training accuracy of just around 90% and a validation accuracy of rougthly 80% its a good first shot.
+The validation loss is about 0,8. This result is ok for an early network but can be improved using varius techniques.
 
 Finetuning
 
